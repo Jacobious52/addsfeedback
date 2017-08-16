@@ -1,0 +1,26 @@
+{
+    "Design": [
+        {
+            "Name": "Submitted Code before Design",
+            "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission (-2).",
+            "Penalty": -2
+        },
+        {
+            "Name": "Incorrect UML Style",
+            "Desc": "Make sure to follow UML style guides in your diagram (-0.5).",
+            "Penalty": -0.5
+        }
+    ],
+    "Style": [
+        {
+            "Name": "using Namespace std",
+            "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design (-0.5).",
+            "Penalty": -0.5
+        },
+        {
+            "name": "redunant comments",
+            "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
+            "Penalty": 0
+        }
+    ]
+}
