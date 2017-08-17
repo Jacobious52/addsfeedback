@@ -11,8 +11,10 @@
     <div class="container">
       <h1>ADDS Feedback Marker</h1>
       <h2>Final Mark: {{ .Mark }}</h2>
-      <div class="card textwrapper"><textarea class="form-control" col="10" rows="10">{{.Message}}</textarea></div>
+      <div class="card textwrapper"><textarea onclick="this.select()" class="form-control text" col="10" rows="10">{{.Message}}</textarea></div>
       <a class="btn btn-large btn-danger" href="/">Back</a>
+      <button class="btn btn-large btn-success copy-button">Copy</button>
     </div>
 </body>
+<script src="/static/js/copypaste.js"></script>
 </html>
