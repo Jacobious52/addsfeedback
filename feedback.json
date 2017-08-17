@@ -1,7 +1,7 @@
 {
     "Design": [
         {
-            "Name": "Submitted Code before Design",
+            "Name": "Code before Design",
             "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission",
             "Penalty": -2
         },
@@ -38,7 +38,7 @@
     ],
     "Style": [
         {
-            "Name": "Using `using namespace std`",
+            "Name": "`using namespace std`",
             "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design",
             "Penalty": -0.5
         },
@@ -82,7 +82,7 @@
         {
             "Name": "Bad objects",
             "Desc": "Assignment specification required particular class hierarchy",
-            "Penalty": -2
+            "Penalty": -1
         },
         {
             "Name": "Failed to compile",
