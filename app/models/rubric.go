@@ -29,6 +29,10 @@ func (f FeedbackItem) ID() string {
 // Feedback all of it
 var Feedback Rubric
 
+func OrderedKeys() []string {
+	return []string{"Design", "Style", "Functionality", "Other"}
+}
+
 // LoadDatabase loads from file into public var
 func LoadDatabase(filename string) {
 	file, err := os.Open(filename)

@@ -36,8 +36,9 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	var allFeedbackBuff bytes.Buffer
 	allFeedbackBuff.WriteString("Feedback:\n")
 
-	for name, section := range models.Feedback {
-		marks := 2.0
+	for _, name := range models.OrderedKeys() {
+		section, _ := models.Feedback[name]
+		checked := false
 		var feedbackBuff bytes.Buffer
 		feedbackBuff.WriteString(fmt.Sprint(name, ":\n"))
 		for _, v := range section {
@@ -46,7 +47,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 				feedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
 				feedbackBuff.WriteString("\n\n")
 
-				marks += v.Penalty
+				checked = true
 
 				// calculate for final marks
 				if name == "Design" {
@@ -61,7 +62,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		// dont write if they got full marks for this section
-		if marks < 2.0 || name == "Other" {
+		if checked {
 			allFeedbackBuff.Write(feedbackBuff.Bytes())
 		}
 	}
