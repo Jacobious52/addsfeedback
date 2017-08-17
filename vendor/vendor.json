@@ -2,5 +2,9 @@
 	"comment": "",
 	"ignore": "test",
 	"package": [],
-	"rootPath": "github.com/Jacobious52/addsfeedback"
+	"rootPath": "github.com/Jacobious52/addsfeedback",
+	"heroku": {
+        "install" : [ "./..." ],
+        "goVersion": "go1.8.3"
+    }
 }
