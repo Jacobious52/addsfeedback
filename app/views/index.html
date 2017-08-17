@@ -9,26 +9,28 @@
 </head>
 <body>
     <div class="container">
-            <h1>ADDS Feedback Marker</h1>
-            <form action="/feedback" method="post">
-                <div class="container" style="margin-top:20px;">
-                    <div class="row">
-                    {{ range $index, $name := .Order }}
-                        <div class="col-xs-6">
-                            <h3 class="text-center">{{ $name }}</h3>
-                            <div class="well" style="overflow: auto;">
-                                <div class="checkbox">
-                                    {{ range $i, $v := (index $.Feedback $name) }}
-                                    <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                                    {{ end }}
-                                </div>
+        <h1>ADDS Feedback Marker</h1>
+        <form action="/feedback" method="post">
+            <div class="container" style="padding: 0px; margin: 0px;">
+                <div class="row">
+                {{ range $index, $name := .Order }}
+                    <div class="col-sm-3">
+                        </br>
+                        <h3>{{ $name }}</h3>
+                        <div class="well" style="overflow: auto;">
+                            <div class="checkbox">
+                                {{ range $i, $v := (index $.Feedback $name) }}
+                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                {{ end }}
                             </div>
                         </div>
-                    {{ end }}
-                    </div> 
-                </div>
-              <input class="btn btn-primary btn-large" type="submit" value="Build">
-            </form>
+                    </div>
+                {{ end }}
+                </div> 
+            </div>
+            </br>
+            <input class="btn btn-primary btn-large" type="submit" value="Build">
+        </form>
     </div>
 </body>
 </html>
