@@ -12,6 +12,11 @@ import (
 	"github.com/Jacobious52/addsfeedback/app/models"
 )
 
+type FinalFeedback struct {
+	Mark    float64
+	Message string
+}
+
 func Feedback(w http.ResponseWriter, r *http.Request) {
 	log.Println("/feedback", r.Method)
 
@@ -93,7 +98,12 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	// write all feedback
 	marksBuffer.Write(allFeedbackBuff.Bytes())
 
-	err = tmpl.Execute(w, marksBuffer.String())
+	results := FinalFeedback{
+		Mark:    styleMarks + designMarks + functionalityMarks,
+		Message: marksBuffer.String(),
+	}
+
+	err = tmpl.Execute(w, results)
 	if err != nil {
 		log.Fatal(err.Error())
 		return
