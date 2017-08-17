@@ -39,18 +39,21 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	// feedback buffer
 	var allFeedbackBuff bytes.Buffer
-	allFeedbackBuff.WriteString("Feedback:\n")
 
 	for _, name := range models.OrderedKeys() {
 		section, _ := models.Feedback[name]
 		checked := false
 		var feedbackBuff bytes.Buffer
-		feedbackBuff.WriteString(fmt.Sprint(name, ":\n"))
+		feedbackBuff.WriteString(fmt.Sprint("\n# ", name, ":\n"))
 		for _, v := range section {
 			if r.Form.Get(v.ID()) == "on" {
 				feedbackBuff.WriteString(v.Desc)
-				feedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
-				feedbackBuff.WriteString("\n\n")
+				if v.Penalty == 0 {
+					feedbackBuff.WriteString(fmt.Sprint("."))
+				} else {
+					feedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
+				}
+				feedbackBuff.WriteString("\n")
 
 				checked = true
 
@@ -88,11 +91,11 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	marksBuffer.WriteString("Functionality: ")
 	marksBuffer.WriteString(fmt.Sprint(functionalityMarks))
-	marksBuffer.WriteString("/2\n\n")
+	marksBuffer.WriteString("/2\n")
 
 	// goodjob if full marks
 	if (styleMarks + designMarks + functionalityMarks) == 6 {
-		allFeedbackBuff.WriteString("Good work!\n")
+		allFeedbackBuff.WriteString("\n\nGood work!\n")
 	}
 
 	// write all feedback
