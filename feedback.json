@@ -67,5 +67,29 @@
             "Desc": "Inconsistent indentation",
             "Penalty": -0.5
         }
+    ],
+    "Functionality": [
+        {
+            "Name": "Fails compile",
+            "Desc": "Fails compilation",
+            "Penalty": -2
+        },
+        {
+            "Name": "Fails all test cases",
+            "Desc": "Fails all test cases",
+            "Penalty": -2
+        },
+        {
+            "Name": "Fails half test cases",
+            "Desc": "Fails half test cases",
+            "Penalty": -1
+        }
+    ],
+    "Other": [
+        {
+            "Name": "junk files",
+            "Desc": "Please avoid submitting other files or binaries (eg, a.out) to SVN, as it is bad practice and will fill up your SVN storage",
+            "Penalty": 0
+        }
     ]
 }
