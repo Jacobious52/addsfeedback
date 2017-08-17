@@ -6,8 +6,8 @@
             "Penalty": -2
         },
         {
-            "Name": "Incorrect UML Style",
-            "Desc": "Make sure to follow UML style guides in your diagram",
+            "Name": "Bad UML Style",
+            "Desc": "Need to follow UML style guides in your diagram",
             "Penalty": -0.5
         },
         {
@@ -16,13 +16,13 @@
             "Penalty": -0.5
         },
         {
-            "Name": "No test case reason",
+            "Name": "No test case rationale",
             "Desc": "Each test case should include a comment as to what it is testing",
             "Penalty": -0.5
         },
         {
             "Name": "Needs more test cases",
-            "Desc": "A broader range of test cases are required to try and cover potential edge cases or “program breaking” scenarios",
+            "Desc": "A broader range of original test cases are required to try and cover potential edge cases or \"program breaking\" scenarios",
             "Penalty": -0.5
         },
         {
@@ -39,11 +39,16 @@
     "Style": [
         {
             "Name": "Using `using namespace std`",
-            "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design (-0.5).",
+            "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design",
             "Penalty": -0.5
         },
         {
-            "name": "Redunant comments",
+            "Name": "Bad naming",
+            "Desc": "Variable and function names should be descriptive as to what they do",
+            "Penalty": -0.5
+        },
+        {
+            "name": "Redundant comments",
             "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
             "Penalty": -0.5
         },
@@ -53,7 +58,7 @@
             "Penalty": -0.5
         },
         {
-            "Name": "Minimal comments",
+            "Name": "Minimal/no comments",
             "Desc": "Minimal or no comments throughout code",
             "Penalty": -1
         },
@@ -70,25 +75,45 @@
     ],
     "Functionality": [
         {
-            "Name": "Fails compile",
-            "Desc": "Fails compilation",
+            "Name": "No recursion",
+            "Desc": "Assignment specification required recursion",
+            "Penalty": -1
+        },
+        {
+            "Name": "Bad objects",
+            "Desc": "Assignment specification required particular class hierarchy",
             "Penalty": -2
         },
         {
-            "Name": "Fails all test cases",
-            "Desc": "Fails all test cases",
+            "Name": "Failed to compile",
+            "Desc": "Failed to compile on Websubmission",
             "Penalty": -2
         },
         {
-            "Name": "Fails half test cases",
-            "Desc": "Fails half test cases",
+            "Name": "Fail all tests",
+            "Desc": "Failing all test cases. Make sure you are testing thoroughly before submitting",
+            "Penalty": -2
+        },
+        {
+            "Name": "Fail some tests",
+            "Desc": "Failing some test cases. Make sure you are testing thoroughly before submitting",
             "Penalty": -1
         }
     ],
     "Other": [
         {
-            "Name": "junk files",
+            "Name": "Junk files",
             "Desc": "Please avoid submitting other files or binaries (eg, a.out) to SVN, as it is bad practice and will fill up your SVN storage",
+            "Penalty": 0
+        },
+        {
+            "Name": "Too many warnings",
+            "Desc": "Try to reduce the number of warnings in your compilations, as it may lead to unexpected errors in the future",
+            "Penalty": 0
+        },
+        {
+            "Name": "See supervisor",
+            "Desc": "If you need more feedback, make sure you are coming to the pracs and speaking with the prac supervisors",
             "Penalty": 0
         }
     ]
