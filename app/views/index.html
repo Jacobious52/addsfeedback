@@ -31,8 +31,27 @@
                                   {{ end }}
                                 </div>
                           </div>
-                          <pre id="display-json"></pre>
                       </div>
+                      <div class="col-xs-6">
+                        <h3 class="text-center">Functionality</h3>
+                        <div class="well" style="overflow: auto;">
+                            <div class="checkbox">
+                                {{ range $i, $v := .Functionality }}
+                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3 class="text-center">Other</h3>
+                        <div class="well" style="overflow: auto;">
+                            <div class="checkbox">
+                                {{ range $i, $v := .Other }}
+                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
                   </div>
               </div>
               <input class="btn btn-primary btn-large" type="submit" value="Build">

@@ -11,8 +11,10 @@ import (
 
 // Rubric is all the feedback database
 type Rubric struct {
-	Design []FeedbackItem
-	Style  []FeedbackItem
+	Design        []FeedbackItem
+	Style         []FeedbackItem
+	Functionality []FeedbackItem
+	Other         []FeedbackItem
 }
 
 // FeedbackItem is a feedback for a section
