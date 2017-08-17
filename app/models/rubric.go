@@ -10,12 +10,7 @@ import (
 )
 
 // Rubric is all the feedback database
-type Rubric struct {
-	Design        []FeedbackItem
-	Style         []FeedbackItem
-	Functionality []FeedbackItem
-	Other         []FeedbackItem
-}
+type Rubric map[string][]FeedbackItem
 
 // FeedbackItem is a feedback for a section
 type FeedbackItem struct {
@@ -24,6 +19,7 @@ type FeedbackItem struct {
 	Penalty float64
 }
 
+// ID hash
 func (f FeedbackItem) ID() string {
 	h := fnv.New32a()
 	h.Write([]byte(f.Name))

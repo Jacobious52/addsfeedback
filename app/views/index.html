@@ -10,50 +10,22 @@
     <div class="container">
             <h1>ADDS Feedback Marker</h1>
             <form action="/feedback" method="post">
-              <div class="container" style="margin-top:20px;">
-                  <div class="row">
-                      <div class="col-xs-6">
-                          <h3 class="text-center">Design</h3>
-                          <div class="well" style="overflow: auto;">
-                              <div class="checkbox">
-                                  {{ range $i, $v := .Design }}
-                                  <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                                  {{ end }}
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-xs-6">
-                          <h3 class="text-center">Style/Commenting</h3>
-                          <div class="well" style="overflow: auto;">
-                              <div class="checkbox">
-                                  {{ range $i, $v := .Style }}
-                                  <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }}  ({{ $v.Penalty }})<br/>
-                                  {{ end }}
+                <div class="container" style="margin-top:20px;">
+                    <div class="row">
+                    {{ range $name, $section := . }}
+                        <div class="col-xs-6">
+                            <h3 class="text-center">{{ $name }}</h3>
+                            <div class="well" style="overflow: auto;">
+                                <div class="checkbox">
+                                    {{ range $i, $v := $section }}
+                                    <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                    {{ end }}
                                 </div>
-                          </div>
-                      </div>
-                      <div class="col-xs-6">
-                        <h3 class="text-center">Functionality</h3>
-                        <div class="well" style="overflow: auto;">
-                            <div class="checkbox">
-                                {{ range $i, $v := .Functionality }}
-                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                                {{ end }}
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <h3 class="text-center">Other</h3>
-                        <div class="well" style="overflow: auto;">
-                            <div class="checkbox">
-                                {{ range $i, $v := .Other }}
-                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                                {{ end }}
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-              </div>
+                    {{ end }}
+                    </div> 
+                </div>
               <input class="btn btn-primary btn-large" type="submit" value="Build">
             </form>
     </div>
