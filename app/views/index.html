@@ -15,17 +15,17 @@
               <div class="row">
               {{ range $index, $name := .Order }}
                   <div class="col-sm-3">
-                      </br>
-                      <h3>{{ $name }}</h3>
-                      <div class="well" style="overflow: auto;">
-                          <div class="checkboxes btn-group-vertical">
-                              {{ range $i, $v := (index $.Feedback $name) }}
-                              <label class="btn btn-secondary">
-                                  <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                              </label>
-                              {{ end }}
-                          </div>
-                      </div>
+                    </br>
+                    <h3>{{ $name }}</h3>
+                    <div class="well">
+                        <div class="checkboxes btn-group-vertical">
+                            {{ range $i, $v := (index $.Feedback $name) }}
+                            <label class="btn btn-secondary">
+                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                            </label>
+                            {{ end }}
+                        </div>
+                    </div>
                   </div>
               {{ end }}
               </div> 
