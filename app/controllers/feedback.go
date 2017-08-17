@@ -28,35 +28,49 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Mark design
-	var designFeedbackBuff bytes.Buffer
 	designMarks := 2.0
-	designFeedbackBuff.WriteString("Design:\n")
-	for _, v := range models.Feedback["Design"] {
-		if r.Form.Get(v.ID()) == "on" {
-			designFeedbackBuff.WriteString(v.Desc)
-			designFeedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
-			designFeedbackBuff.WriteString("\n\n")
-			designMarks += v.Penalty
-		}
-	}
-	designMarks = math.Max(0, designMarks)
-
-	// Mark style
-	var styleFeedbackBuff bytes.Buffer
 	styleMarks := 2.0
-	styleFeedbackBuff.WriteString("\nStyle/Commenting:\n")
-	for _, v := range models.Feedback["Style"] {
-		if r.Form.Get(v.ID()) == "on" {
-			styleFeedbackBuff.WriteString(v.Desc)
-			styleFeedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
-			styleFeedbackBuff.WriteString("\n\n")
-			styleMarks += v.Penalty
+	functionalityMarks := 2.0
+
+	// feedback buffer
+	var allFeedbackBuff bytes.Buffer
+	allFeedbackBuff.WriteString("Feedback:\n")
+
+	for name, section := range models.Feedback {
+		marks := 2.0
+		var feedbackBuff bytes.Buffer
+		feedbackBuff.WriteString(fmt.Sprint(name, ":\n"))
+		for _, v := range section {
+			if r.Form.Get(v.ID()) == "on" {
+				feedbackBuff.WriteString(v.Desc)
+				feedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
+				feedbackBuff.WriteString("\n\n")
+
+				marks += v.Penalty
+
+				// calculate for final marks
+				if name == "Design" {
+					designMarks += v.Penalty
+				}
+				if name == "Style" {
+					styleMarks += v.Penalty
+				}
+				if name == "Functionality" {
+					functionalityMarks += v.Penalty
+				}
+			}
+		}
+		// dont write if they got full marks for this section
+		if marks < 2.0 || name == "Other" {
+			allFeedbackBuff.Write(feedbackBuff.Bytes())
 		}
 	}
+	// cap the marks
+	designMarks = math.Max(0, designMarks)
 	styleMarks = math.Max(0, styleMarks)
+	functionalityMarks = math.Max(0, functionalityMarks)
 
-	// Create marks
+	// Create marks scheme
 	var marksBuffer bytes.Buffer
 	marksBuffer.WriteString("Design: ")
 	marksBuffer.WriteString(fmt.Sprint(designMarks))
@@ -66,30 +80,17 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	marksBuffer.WriteString(fmt.Sprint(styleMarks))
 	marksBuffer.WriteString("/2\n")
 
-	marksBuffer.WriteString("Functionality: 2/2")
-	marksBuffer.WriteString("\n\n")
+	marksBuffer.WriteString("Functionality: ")
+	marksBuffer.WriteString(fmt.Sprint(functionalityMarks))
+	marksBuffer.WriteString("/2\n\n")
 
-	// Write feedback
-	var feedbackBuff bytes.Buffer
-	feedbackBuff.WriteString("Feedback:\n")
-
-	// write design feedback
-	if designMarks < 2 {
-		feedbackBuff.Write(designFeedbackBuff.Bytes())
-	}
-
-	// write style feedback
-	if styleMarks < 2 {
-		feedbackBuff.Write(styleFeedbackBuff.Bytes())
-	}
-
-	// write full marks
-	if (styleMarks + designMarks) == 4 {
-		feedbackBuff.WriteString("Good work!\n")
+	// goodjob if full marks
+	if (styleMarks + designMarks + functionalityMarks) == 6 {
+		allFeedbackBuff.WriteString("Good work!\n")
 	}
 
 	// write all feedback
-	marksBuffer.Write(feedbackBuff.Bytes())
+	marksBuffer.Write(allFeedbackBuff.Bytes())
 
 	err = tmpl.Execute(w, marksBuffer.String())
 	if err != nil {
