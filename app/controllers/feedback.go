@@ -71,7 +71,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	// Write feedback
 	var feedbackBuff bytes.Buffer
-	// feedbackBuff.WriteString("Feedback:\n")
+	feedbackBuff.WriteString("Feedback:\n")
 
 	// write design feedback
 	if designMarks < 2 {

@@ -46,6 +46,26 @@
             "name": "Redunant comments",
             "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
             "Penalty": -0.5
+        },
+        {
+            "Name": "Verbose comments",
+            "Desc": "Overly verbose comments, try to keep them concise and relevant",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Minimal comments",
+            "Desc": "Minimal or no comments throughout code",
+            "Penalty": -1
+        },
+        {
+            "Name": "Dead code",
+            "Desc": "Avoid including commented out code in your final submission",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Inconsistent indentation",
+            "Desc": "Inconsistent indentation",
+            "Penalty": -0.5
         }
     ]
 }
