@@ -20,7 +20,7 @@
         {
             "name": "redunant comments",
             "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
-            "Penalty": 0
+            "Penalty": -0.5
         }
     ]
 }

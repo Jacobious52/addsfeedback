@@ -19,7 +19,7 @@ func main() {
 
 	// routes
 	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/static", fs)
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", controllers.Index)
 	http.HandleFunc("/feedback", controllers.Feedback)

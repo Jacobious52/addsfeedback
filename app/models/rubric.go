@@ -19,7 +19,7 @@ type Rubric struct {
 type FeedbackItem struct {
 	Name    string
 	Desc    string
-	Penalty float32
+	Penalty float64
 }
 
 func (f FeedbackItem) ID() string {
