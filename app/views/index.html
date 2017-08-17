@@ -17,7 +17,7 @@
                           <div class="well" style="overflow: auto;">
                               <div class="checkbox">
                                   {{ range $i, $v := .Design }}
-                                  <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }}<br/>
+                                  <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
                                   {{ end }}
                               </div>
                           </div>
@@ -27,7 +27,7 @@
                           <div class="well" style="overflow: auto;">
                               <div class="checkbox">
                                   {{ range $i, $v := .Style }}
-                                  <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }}<br/>
+                                  <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }}  ({{ $v.Penalty }})<br/>
                                   {{ end }}
                                 </div>
                           </div>

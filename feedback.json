@@ -2,23 +2,48 @@
     "Design": [
         {
             "Name": "Submitted Code before Design",
-            "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission (-2).",
+            "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission",
             "Penalty": -2
         },
         {
             "Name": "Incorrect UML Style",
-            "Desc": "Make sure to follow UML style guides in your diagram (-0.5).",
+            "Desc": "Make sure to follow UML style guides in your diagram",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Short descriptions",
+            "Desc": "Expand more on your descriptions of core functions, as it will assist in your implementation",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "No test case reason",
+            "Desc": "Each test case should include a comment as to what it is testing",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Needs more test cases",
+            "Desc": "A broader range of test cases are required to try and cover potential edge cases or “program breaking” scenarios",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Minimal or no test cases",
+            "Desc": "Test cases should include multiple example inputs, expected outputs, and a comment on what it is testing",
+            "Penalty": -1
+        },
+        {
+            "Name": "Code in design",
+            "Desc": "Do not include any code in your design, as you should be designing before you are coding",
             "Penalty": -0.5
         }
     ],
     "Style": [
         {
-            "Name": "using Namespace std",
+            "Name": "Using `using namespace std`",
             "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design (-0.5).",
             "Penalty": -0.5
         },
         {
-            "name": "redunant comments",
+            "name": "Redunant comments",
             "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
             "Penalty": -0.5
         }

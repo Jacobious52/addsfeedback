@@ -35,7 +35,8 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	for _, v := range models.Feedback.Design {
 		if r.Form.Get(v.ID()) == "on" {
 			designFeedbackBuff.WriteString(v.Desc)
-			designFeedbackBuff.WriteString("\n")
+			designFeedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
+			designFeedbackBuff.WriteString("\n\n")
 			designMarks += v.Penalty
 		}
 	}
@@ -48,6 +49,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	for _, v := range models.Feedback.Style {
 		if r.Form.Get(v.ID()) == "on" {
 			styleFeedbackBuff.WriteString(v.Desc)
+			styleFeedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
 			styleFeedbackBuff.WriteString("\n\n")
 			styleMarks += v.Penalty
 		}
@@ -69,7 +71,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	// Write feedback
 	var feedbackBuff bytes.Buffer
-	feedbackBuff.WriteString("Feedback:\n")
+	// feedbackBuff.WriteString("Feedback:\n")
 
 	// write design feedback
 	if designMarks < 2 {
