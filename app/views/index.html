@@ -19,7 +19,9 @@
                             <div class="well" style="overflow: auto;">
                                 <div class="checkbox">
                                     {{ range $i, $v := (index $.Feedback $name) }}
-                                    <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                    <label class="btn btn-default">
+                                        <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                    </label>
                                     {{ end }}
                                 </div>
                             </div>
