@@ -8,6 +8,7 @@ import (
 	"log"
 	"math"
 	"net/http"
+	"strconv"
 
 	"github.com/Jacobious52/addsfeedback/app/models"
 )
@@ -49,7 +50,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 			if r.Form.Get(v.ID()) == "on" {
 				feedbackBuff.WriteString(v.Desc)
 				if v.Penalty == 0 {
-					feedbackBuff.WriteString(fmt.Sprint("."))
+					feedbackBuff.WriteString(".")
 				} else {
 					feedbackBuff.WriteString(fmt.Sprint(" (", v.Penalty, ")."))
 				}
@@ -69,6 +70,38 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		}
+
+		extraText := r.Form.Get(fmt.Sprint("extra-comments-", name))
+		if extraText != "" {
+			extraPenatly := r.Form.Get(fmt.Sprint("extra-penalty-", name))
+
+			penalty, err := strconv.ParseFloat(extraPenatly, 64)
+			if err != nil {
+				log.Println("Bad extra penatly", err.Error())
+				penalty = 0
+			}
+
+			feedbackBuff.WriteString(extraText)
+			if penalty == 0 {
+				feedbackBuff.WriteString(".")
+			} else {
+				feedbackBuff.WriteString(fmt.Sprint(" (", penalty, ")."))
+			}
+			feedbackBuff.WriteString("\n")
+			checked = true
+
+			// calculate for final marks
+			if name == "Design" {
+				designMarks += penalty
+			}
+			if name == "Style" {
+				styleMarks += penalty
+			}
+			if name == "Functionality" {
+				functionalityMarks += penalty
+			}
+		}
+
 		// dont write if they got full marks for this section
 		if checked {
 			allFeedbackBuff.Write(feedbackBuff.Bytes())
