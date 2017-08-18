@@ -13,8 +13,11 @@ type OrderedFeedback struct {
 	Feedback models.Rubric
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("app/views/index.html")
+func Build(w http.ResponseWriter, r *http.Request) {
+
+	log.Println("/build", r.Method)
+
+	tmpl, err := template.ParseFiles("app/views/build.html")
 	if err != nil {
 		log.Fatal(err.Error())
 		return

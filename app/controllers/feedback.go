@@ -22,7 +22,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	log.Println("/feedback", r.Method)
 
 	if r.Method != "POST" {
-		io.WriteString(w, "bad request")
+		io.WriteString(w, "only accepts POST request. got "+r.Method)
 		return
 	}
 

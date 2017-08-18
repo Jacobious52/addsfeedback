@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/subtle"
 	"log"
 	"net/http"
 	"os"
@@ -8,6 +9,23 @@ import (
 	"github.com/Jacobious52/addsfeedback/app/controllers"
 	"github.com/Jacobious52/addsfeedback/app/models"
 )
+
+func BasicAuth(handler http.HandlerFunc, username, password, realm string) http.HandlerFunc {
+
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		user, pass, ok := r.BasicAuth()
+
+		if !ok || subtle.ConstantTimeCompare([]byte(user), []byte(username)) != 1 || subtle.ConstantTimeCompare([]byte(pass), []byte(password)) != 1 {
+			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+			w.WriteHeader(401)
+			w.Write([]byte("Unauthorised.\n"))
+			return
+		}
+
+		handler(w, r)
+	}
+}
 
 func main() {
 	port := os.Getenv("PORT")
@@ -21,8 +39,8 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	http.HandleFunc("/", controllers.Index)
-	http.HandleFunc("/feedback", controllers.Feedback)
+	http.HandleFunc("/", BasicAuth(controllers.Build, "addsmarker", "c++11", "addsmarkersite"))
+	http.HandleFunc("/feedback", BasicAuth(controllers.Feedback, "addsmarker", "c++11", "addsmarkersite"))
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
