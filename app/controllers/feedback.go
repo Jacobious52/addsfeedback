@@ -48,6 +48,9 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 		feedbackBuff.WriteString(fmt.Sprint("\n# ", name, ":\n"))
 		for _, v := range section {
 			if r.Form.Get(v.ID()) == "on" {
+
+				v.Penalty = -math.Abs(v.Penalty)
+
 				feedbackBuff.WriteString(v.Desc)
 				if v.Penalty == 0 {
 					feedbackBuff.WriteString(".")
@@ -80,6 +83,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 				log.Println("Bad extra penatly", err.Error())
 				penalty = 0
 			}
+			penalty = -math.Abs(penalty)
 
 			feedbackBuff.WriteString(extraText)
 			if penalty == 0 {
