@@ -26,12 +26,12 @@
                             {{ end }}
 
                         </div>
-                        <br/>
-                        Extra:
-                        <textarea class="form-control" rows="3" name="extra-comments-{{ $name }}"></textarea>
-                        Penalty:
-                        <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}">
+
                     </div>
+                    Extra:
+                    <textarea class="form-control" rows="3" name="extra-comments-{{ $name }}"></textarea>
+                    Penalty:
+                    <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}" step="0.25" max="0.0" min="-2.0">
                   </div>
               {{ end }}
               </div> 
