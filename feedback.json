@@ -95,6 +95,11 @@
     ],
     "Functionality": [
         {
+            "Name": "Too many warnings",
+            "Desc": "Too many warnings in your compilation, can be an indicator of bad implementation",
+            "Penalty": -0.5
+        },
+        {
             "Header": "Spec",
             "Name": "No recursion",
             "Desc": "Assignment specification required recursion",
@@ -104,11 +109,6 @@
             "Name": "Bad objects",
             "Desc": "Assignment specification required particular class hierarchy",
             "Penalty": -1
-        },
-        {
-            "Name": "Too many warnings",
-            "Desc": "Too many warnings in your compilation, can be an indicator of bad implementation",
-            "Penalty": -0.5
         },
         {
             "Header": "Failures",
