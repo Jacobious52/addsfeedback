@@ -17,7 +17,7 @@
             {{ range $index, $name := .Order }}
                 <div class="columns col-md-3">
                     <h3>{{ $name }}</h3>
-                    <div class="alert alert-success">
+                    <div class="alert alert-info">
                         <div class="checkboxes btn-group-vertical">
                             {{ range $i, $v := (index $.Feedback $name) }}
                                     {{ if $v.Header }}
