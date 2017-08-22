@@ -1,6 +1,7 @@
 {
     "Design": [
-        {
+        {   
+            "Header": "UML",
             "Name": "Code before Design",
             "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission",
             "Penalty": -2
@@ -11,11 +12,13 @@
             "Penalty": -0.5
         },
         {
+            "Header": "Descriptions",
             "Name": "Short descriptions",
             "Desc": "Expand more on your descriptions of core functions, as it will assist in your implementation",
             "Penalty": -0.5
         },
         {
+            "Header": "Tests",
             "Name": "No test case rationale",
             "Desc": "Each test case should include a comment as to what it is testing",
             "Penalty": -0.5
@@ -31,6 +34,7 @@
             "Penalty": -1
         },
         {
+            "Header": "Other",
             "Name": "Code in design",
             "Desc": "Do not include any code in your design, as you should be designing before you are coding",
             "Penalty": -0.5

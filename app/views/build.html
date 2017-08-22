@@ -22,6 +22,9 @@
                     <div class="well">
                         <div class="checkboxes btn-group-vertical">
                             {{ range $i, $v := (index $.Feedback $name) }}
+                                {{ if $v.Header }}
+                                <p>{{ $v.Header }}</p>
+                                {{ end }}
                             <label class="btn btn-secondary text-left">
                                 <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
                             </label>
