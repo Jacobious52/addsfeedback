@@ -133,7 +133,16 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	// goodjob if full marks
 	if (styleMarks + designMarks + functionalityMarks) == 6 {
-		goodFeedback := []string{"Good work!", "Good job", "Nice job!", "Nice work", "6/6", "Good code.", "Top stuff", "Noice"}
+		goodFeedback := []string{
+			"Good work!",
+			"Good job",
+			"Nice job!",
+			"Nice work",
+			"6/6",
+			"Good code.",
+			"Top stuff",
+			"Noice",
+		}
 
 		goodBuffer := fmt.Sprint("\n\n", goodFeedback[rand.Intn(len(goodFeedback))])
 		allFeedbackBuff.WriteString(goodBuffer)
