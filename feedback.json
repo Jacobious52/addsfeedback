@@ -1,14 +1,24 @@
 {
     "Design": [
         {   
-            "Header": "UML",
             "Name": "Code before Design",
             "Desc": "Make sure to do your design first, before writing any code, as it will greatly assist you in your implementation. No design in first submission",
             "Penalty": -2
         },
         {
+            "Name": "Code in design",
+            "Desc": "Do not include any code in your design, as you should be designing before you are coding",
+            "Penalty": -0.5
+        },
+        {
+            "Header": "UML",
             "Name": "Bad UML Style",
             "Desc": "Need to follow UML style guides in your diagram",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "No UML",
+            "Desc": "No UML present",
             "Penalty": -0.5
         },
         {
@@ -18,7 +28,12 @@
             "Penalty": -0.5
         },
         {
-            "Header": "Tests",
+            "Name": "Dot point format",
+            "Desc": "When writing your descriptions, use dot point format to help structure and readability",
+            "Penalty": 0
+        },
+        {
+            "Header": "Testing",
             "Name": "No test case rationale",
             "Desc": "Each test case should include a comment as to what it is testing",
             "Penalty": -0.5
@@ -32,12 +47,6 @@
             "Name": "Minimal or no test cases",
             "Desc": "Test cases should include multiple example inputs, expected outputs, and a comment on what it is testing",
             "Penalty": -1
-        },
-        {
-            "Header": "Other",
-            "Name": "Code in design",
-            "Desc": "Do not include any code in your design, as you should be designing before you are coding",
-            "Penalty": -0.5
         }
     ],
     "Style": [
@@ -47,12 +56,8 @@
             "Penalty": -0.5
         },
         {
-            "Name": "Bad naming",
-            "Desc": "Variable and function names should be descriptive as to what they do",
-            "Penalty": -0.5
-        },
-        {
-            "name": "Redundant comments",
+            "Header": "Comments",
+            "Name": "Redundant comments",
             "Desc": "Keep your comments relevant and concise, and aim to explain WHY you are doing something, not WHAT you are doing.",
             "Penalty": -0.5
         },
@@ -72,18 +77,25 @@
             "Penalty": -1
         },
         {
-            "Name": "Dead code",
-            "Desc": "Avoid including commented out code in your final submission",
+            "Header":"General Style",
+            "Name": "Bad naming",
+            "Desc": "Variable and function names should be descriptive as to what they do",
             "Penalty": -0.5
         },
         {
             "Name": "Inconsistent indentation",
             "Desc": "Inconsistent indentation",
             "Penalty": -0.5
+        },
+        {
+            "Name": "Dead code",
+            "Desc": "Avoid including commented out code in your final submission",
+            "Penalty": -0.5
         }
     ],
     "Functionality": [
         {
+            "Header": "Spec",
             "Name": "No recursion",
             "Desc": "Assignment specification required recursion",
             "Penalty": -1
@@ -99,13 +111,14 @@
             "Penalty": -0.5
         },
         {
+            "Header": "Failures",
             "Name": "Failed to compile",
             "Desc": "Failed to compile on Websubmission",
             "Penalty": -2
         },
         {
-            "Name": "Fail all tests",
-            "Desc": "Failing all test cases. Make sure you are testing thoroughly before submitting",
+            "Name": "Fail most tests",
+            "Desc": "Failing most or all test cases. Make sure you are testing thoroughly before submitting",
             "Penalty": -2
         },
         {
@@ -127,7 +140,7 @@
         },
         {
             "Name": "See supervisor",
-            "Desc": "If you need more feedback, make sure you are coming to the pracs and speaking with the prac supervisors",
+            "Desc": "If you are needing help with your code, make sure you are coming to the practicals and speaking with the practical supervisors",
             "Penalty": 0
         }
     ]
