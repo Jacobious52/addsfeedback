@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#db5945">
-  <meta lang="en">
-  <title>ADDS Feedback Helper</title>
-  <link rel="stylesheet" href="/static/stylesheets/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#db5945">
+    <meta lang="en">
+    <title>ADDS Feedback Helper</title>
+    <link rel="stylesheet" href="/static/stylesheets/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-      <h1>ADDS Feedback Marker</h1>
-      <form action="/feedback" method="post">
+        <h1>ADDS Feedback Marker</h1>
+        <form action="/feedback" method="post">
             <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build Feedback">
-            <p>
             <div class="row">
-            {{ range $index, $name := .Order }}
-                <div class="columns col-md-3">
-                    <div class="rounded">
-                        <h3>{{ $name }}</h3>
-                        <div class="checkboxes btn-group-vertical">
-                            {{ range $i, $v := (index $.Feedback $name) }}
-                                    {{ if $v.Header }}
-                                        </div>
-                                        <h5>{{ $v.Header }}</h5>
-                                        <div class="checkboxes btn-group-vertical">
-                                    {{ end }}
-                            <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
-                                <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                            </label>
-                            {{ end }}
+                {{ range $index, $name := .Order }}
+                    <div class="columns col-md-3">
+                        <div class="rounded">
+                            <h3>{{ $name }}</h3>
+                            <div class="checkboxes btn-group-vertical">
+                                {{ range $i, $v := (index $.Feedback $name) }}
+                                        {{ if $v.Header }}
+                                            </div>
+                                            <h5>{{ $v.Header }}</h5>
+                                            <div class="checkboxes btn-group-vertical">
+                                        {{ end }}
+                                <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
+                                    <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                </label>
+                                {{ end }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{ end }}
+                {{ end }}
             </div>
-            </p>
             <div class="row">
-            {{ range $index, $name := .Order }}
-                <div class="col-md-3">
-                    Extra:
-                    <textarea class="form-control" placeholder="Extra comments" rows="3" name="extra-comments-{{ $name }}"></textarea>
-                    Penalty:
-                    <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}" step="0.25" max="0.0" min="-2.0">
-                </div>
-            {{ end }}
+                {{ range $index, $name := .Order }}
+                    <div class="col-md-3">
+                        Extra:
+                        <textarea class="form-control" placeholder="Extra comments" rows="3" name="extra-comments-{{ $name }}"></textarea>
+                        Penalty:
+                        <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}" step="0.25" max="0.0" min="-2.0">
+                    </div>
+                {{ end }}
             </div>
-      </form>
-      <p>
-        <div class="row">
-            <div class="col-md-12">
-                <sub>By Jacob Gonzalez, with the help of Sam Lewis and Jake Lane</sub>
+        </form>
+        <footer class="row">
+            <div class="col-md-12 text-center">
+                </br></br>
+                By <a href="https://github.com/Jacobious52">Jacob Gonzalez</a>
+                </br>
+                with Sam Lewis and Jake Lane
             </div>
-        </div>
+        </footer>
     </div>
 </body>
 </html>
