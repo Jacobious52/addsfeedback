@@ -58,7 +58,12 @@
             "Penalty": -0.5
         },
         {
-            "Name": "Minimal/no comments",
+            "Name": "Minimal comments",
+            "Desc": "Not enough comments throughout code",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "No comments",
             "Desc": "Minimal or no comments throughout code",
             "Penalty": -1
         },
@@ -85,6 +90,11 @@
             "Penalty": -1
         },
         {
+            "Name": "Too many warnings",
+            "Desc": "Too many warnings in your compilation, can be an indicator of bad implementation",
+            "Penalty": -0.5
+        },
+        {
             "Name": "Failed to compile",
             "Desc": "Failed to compile on Websubmission",
             "Penalty": -2
@@ -107,7 +117,7 @@
             "Penalty": 0
         },
         {
-            "Name": "Too many warnings",
+            "Name": "Warning warnings",
             "Desc": "Try to reduce the number of warnings in your compilations, as it may lead to unexpected errors in the future",
             "Penalty": 0
         },
