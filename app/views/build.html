@@ -15,19 +15,21 @@
       <form action="/feedback" method="post">
             <div class="row">
             {{ range $index, $name := .Order }}
-                <div class="col-md-3">
+                <div class="columns col-md-3">
                     <h3>{{ $name }}</h3>
-                    <div class="checkboxes btn-group-vertical">
-                        {{ range $i, $v := (index $.Feedback $name) }}
-                                {{ if $v.Header }}
-                                    </div>
-                                    <h5>{{ $v.Header }}</h5>
-                                    <div class="checkboxes btn-group-vertical">
-                                {{ end }}
-                        <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
-                            <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                        </label>
-                        {{ end }}
+                    <div class="alert alert-success">
+                        <div class="checkboxes btn-group-vertical">
+                            {{ range $i, $v := (index $.Feedback $name) }}
+                                    {{ if $v.Header }}
+                                        </div>
+                                        <h5>{{ $v.Header }}</h5>
+                                        <div class="checkboxes btn-group-vertical">
+                                    {{ end }}
+                            <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
+                                <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                            </label>
+                            {{ end }}
+                        </div>
                     </div>
                 </div>
             {{ end }}
