@@ -13,38 +13,40 @@
     <div class="container">
       <h1>ADDS Feedback Marker</h1>
       <form action="/feedback" method="post">
+            <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build Feedback">
+            <p>
             <div class="row">
             {{ range $index, $name := .Order }}
-                <div class="col-md-3">
-                    <h3>{{ $name }}</h3>
-                    <div class="checkboxes btn-group-vertical">
-                        {{ range $i, $v := (index $.Feedback $name) }}
-                                {{ if $v.Header }}
-                                    </div>
-                                    <h5>{{ $v.Header }}</h5>
-                                    <div class="checkboxes btn-group-vertical">
-                                {{ end }}
-                        <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
-                            <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                        </label>
-                        {{ end }}
+                <div class="columns col-md-3">
+                    <div class="rounded">
+                        <h3>{{ $name }}</h3>
+                        <div class="checkboxes btn-group-vertical">
+                            {{ range $i, $v := (index $.Feedback $name) }}
+                                    {{ if $v.Header }}
+                                        </div>
+                                        <h5>{{ $v.Header }}</h5>
+                                        <div class="checkboxes btn-group-vertical">
+                                    {{ end }}
+                            <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
+                                <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                            </label>
+                            {{ end }}
+                        </div>
                     </div>
                 </div>
             {{ end }}
             </div>
-
+            </p>
             <div class="row">
             {{ range $index, $name := .Order }}
                 <div class="col-md-3">
                     Extra:
-                    <textarea class="form-control" rows="3" name="extra-comments-{{ $name }}"></textarea>
+                    <textarea class="form-control" placeholder="Add any extra comments here" rows="3" name="extra-comments-{{ $name }}"></textarea>
                     Penalty:
                     <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}" step="0.25" max="0.0" min="-2.0">
                 </div>
             {{ end }}
             </div>
-        </br>
-        <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build">
       </form>
     </div>
 </body>

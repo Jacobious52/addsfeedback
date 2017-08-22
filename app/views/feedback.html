@@ -14,7 +14,7 @@
       <h1>ADDS Feedback Marker</h1>
       <a class="btn btn-lg btn-danger" href="/">Back</a>
       <button class="btn btn-lg btn-success copy-button">Copy</button>
-      <h2>Final Mark: {{ .Mark }}</h2>
+      <h2>Final Mark: <span id="feedback-marks">{{ .Mark }}</span></h2>
       <div class="card textwrapper">
           <textarea id="feedback-text" class="form-control text" rows="25">{{.Message}}</textarea>
       </div>
