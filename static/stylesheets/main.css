@@ -7,3 +7,7 @@
 h5 {
 	font-size: 1em !important;
 }
+
+.container {
+	max-width: 95% !important;
+}
