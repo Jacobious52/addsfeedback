@@ -16,16 +16,13 @@
             <div class="row">
             {{ range $index, $name := .Order }}
                 <div class="col-md-3">
-                    </br>
                     <h3>{{ $name }}</h3>
-                    <div class="well">
-                        <div class="checkboxes btn-group-vertical">
-                            {{ range $i, $v := (index $.Feedback $name) }}
-                            <label class="btn btn-secondary text-left">
-                                <input alt="{{ $v.Desc }}" type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
-                            </label>
-                            {{ end }}
-                        </div>
+                    <div class="checkboxes btn-group-vertical" style="width:100%">
+                        {{ range $i, $v := (index $.Feedback $name) }}
+                        <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
+                            <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                        </label>
+                        {{ end }}
                     </div>
                 </div>
             {{ end }}
@@ -34,7 +31,6 @@
             <div class="row">
             {{ range $index, $name := .Order }}
                 <div class="col-md-3">
-                    </br>
                     Extra:
                     <textarea class="form-control" rows="3" name="extra-comments-{{ $name }}"></textarea>
                     Penalty:
@@ -42,7 +38,6 @@
                 </div>
             {{ end }}
             </div> 
-
         </br>
         <input class="btn btn-primary btn-lg" type="submit" value="Build">
       </form>
