@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"math"
+	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -76,11 +77,11 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 		extraText := r.Form.Get(fmt.Sprint("extra-comments-", name))
 		if extraText != "" {
-			extraPenatly := r.Form.Get(fmt.Sprint("extra-penalty-", name))
+			extraPenalty := r.Form.Get(fmt.Sprint("extra-penalty-", name))
 
-			penalty, err := strconv.ParseFloat(extraPenatly, 64)
+			penalty, err := strconv.ParseFloat(extraPenalty, 64)
 			if err != nil {
-				log.Println("Bad extra penatly", err.Error())
+				log.Println("Bad extra penalty", err.Error())
 				penalty = 0
 			}
 			penalty = -math.Abs(penalty)
@@ -132,7 +133,10 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	// goodjob if full marks
 	if (styleMarks + designMarks + functionalityMarks) == 6 {
-		allFeedbackBuff.WriteString("\n\nGood work!\n")
+		goodFeedback := []string{"Good work!", "Good job", "Nice job!", "Nice work", "6/6", "Good code.", "Top stuff", "Noice"}
+
+		goodBuffer := fmt.Sprint("\n\n", goodFeedback[rand.Intn(len(goodFeedback))])
+		allFeedbackBuff.WriteString(goodBuffer)
 	}
 
 	// write all feedback

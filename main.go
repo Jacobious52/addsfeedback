@@ -3,8 +3,10 @@ package main
 import (
 	"crypto/subtle"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/Jacobious52/addsfeedback/app/controllers"
 	"github.com/Jacobious52/addsfeedback/app/models"
@@ -32,6 +34,8 @@ func main() {
 	if port == "" {
 		port = "3000"
 	}
+
+	rand.Seed(time.Now().Unix())
 
 	models.LoadDatabase("feedback.json")
 
