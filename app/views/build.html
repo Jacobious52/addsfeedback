@@ -13,11 +13,13 @@
     <div class="container">
       <h1>ADDS Feedback Marker</h1>
       <form action="/feedback" method="post">
+            <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build Feedback">
+            <p>
             <div class="row">
             {{ range $index, $name := .Order }}
                 <div class="columns col-md-3">
-                    <h3>{{ $name }}</h3>
-                    <div class="alert alert-info">
+                    <div class="rounded">
+                        <h3>{{ $name }}</h3>
                         <div class="checkboxes btn-group-vertical">
                             {{ range $i, $v := (index $.Feedback $name) }}
                                     {{ if $v.Header }}
@@ -34,7 +36,7 @@
                 </div>
             {{ end }}
             </div>
-
+            </p>
             <div class="row">
             {{ range $index, $name := .Order }}
                 <div class="col-md-3">
@@ -45,8 +47,6 @@
                 </div>
             {{ end }}
             </div>
-        </br>
-        <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build">
       </form>
     </div>
 </body>
