@@ -1,15 +1,9 @@
-textarea
-{
-  width:100%;
-}
-.textwrapper
-{
-  border:1px solid #999999;
-  margin:5px 0;
-  padding:3px;
-}
-
 .checkboxes 
 {
-  margin-bottom: 20px;
+	margin-bottom: 5px;
+	width:100% !important;
+}
+
+h5 {
+	font-size: 1em !important;
 }

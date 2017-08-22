@@ -17,6 +17,7 @@ type FeedbackItem struct {
 	Name    string
 	Desc    string
 	Penalty float64
+	Header  string
 }
 
 // ID hash
