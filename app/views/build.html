@@ -29,7 +29,9 @@
                                             <div class="checkboxes btn-group-vertical">
                                         {{ end }}
                                 <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
-                                    <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                    <input type="checkbox" name="{{ $v.ID }}">
+                                    {{ $v.Name }}
+                                    <span style="float:right;">({{ $v.Penalty }})</span>
                                 </label>
                                 {{ end }}
                             </div>
