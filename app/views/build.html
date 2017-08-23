@@ -29,7 +29,9 @@
                                             <div class="checkboxes btn-group-vertical">
                                         {{ end }}
                                 <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
-                                    <input type="checkbox" name="{{ $v.ID }}"> {{ $v.Name }} ({{ $v.Penalty }})<br/>
+                                    <input type="checkbox" name="{{ $v.ID }}">
+                                    {{ $v.Name }}
+                                    <span style="float:right;">({{ $v.Penalty }})</span>
                                 </label>
                                 {{ end }}
                             </div>
@@ -39,7 +41,7 @@
             </div>
             <div class="row">
                 {{ range $index, $name := .Order }}
-                    <div class="col-md-3">
+                    <div class="columns col-md-3">
                         Extra:
                         <textarea class="form-control" placeholder="Extra comments" rows="3" name="extra-comments-{{ $name }}"></textarea>
                         Penalty:
