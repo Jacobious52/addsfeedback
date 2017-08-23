@@ -9,6 +9,14 @@
 	padding: 5px;
 }
 
+.grow { 
+	transition: all .2s ease-in-out;
+}
+
+.grow:hover { 
+	transform: scale(1.015);
+}
+
 h5 {
 	font-size: 1em !important;
 }

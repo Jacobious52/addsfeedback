@@ -19,7 +19,7 @@
             <div class="row">
                 {{ range $index, $name := .Order }}
                     <div class="columns col-md-3">
-                        <div class="rounded">
+                        <div class="rounded grow">
                             <h3>{{ $name }}</h3>
                             <div class="checkboxes btn-group-vertical">
                                 {{ range $i, $v := (index $.Feedback $name) }}
@@ -51,7 +51,7 @@
             </div>
         </form>
         <footer class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center grow">
                 </br></br>
                 By <a href="https://github.com/Jacobious52">Jacob Gonzalez</a>
                 </br>
