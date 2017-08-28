@@ -4,7 +4,9 @@
 	"package": [],
 	"rootPath": "github.com/Jacobious52/addsfeedback",
 	"heroku": {
-        "install" : [ "./..." ],
-        "goVersion": "go1.8.3"
-    }
+		"install": [
+			"./..."
+		],
+		"goVersion": "go1.9.0"
+	}
 }

@@ -37,11 +37,14 @@ func main() {
 
 	rand.Seed(time.Now().Unix())
 
-	models.LoadDatabase("feedback.json")
+	models.LoadDatabase("db/feedback.json")
 
 	// routes
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	dbfs := http.FileServer(http.Dir("db"))
+	http.Handle("/db/", http.StripPrefix("/db/", dbfs))
 
 	http.HandleFunc("/", BasicAuth(controllers.Build, "addsmarker", "c++11", "addsmarkersite"))
 	http.HandleFunc("/feedback", BasicAuth(controllers.Feedback, "addsmarker", "c++11", "addsmarkersite"))
