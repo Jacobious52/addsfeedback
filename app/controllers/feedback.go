@@ -141,7 +141,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 			"6/6",
 			"Good code.",
 			"Top stuff",
-			"Noice",
+			"Nice",
 		}
 
 		goodBuffer := fmt.Sprint("\n\n", goodFeedback[rand.Intn(len(goodFeedback))])

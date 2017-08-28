@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,57 +8,60 @@
     <meta lang="en">
     <title>ADDS Feedback Helper</title>
     <link rel="stylesheet" href="/static/stylesheets/main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container">
         <h1>ADDS Feedback Marker</h1>
-        <form action="/feedback" method="post">
-            <p>
-                <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build Feedback">
-            </p>
-            <div class="row">
-                {{ range $index, $name := .Order }}
+        <p>
+            <form action="/feedback" method="post">
+                <p>
+                    <input id="build-action" class="btn btn-primary btn-lg" type="submit" value="Build Feedback">
+                    <a class="float-right" href="/db/feedback.json">View Feedback Database</a>
+                </p>
+                <div class="row">
+                    {{ range $index, $name := .Order }}
                     <div class="columns col-md-3">
                         <div class="rounded">
                             <h3>{{ $name }}</h3>
                             <div class="checkboxes btn-group-vertical">
-                                {{ range $i, $v := (index $.Feedback $name) }}
-                                        {{ if $v.Header }}
-                                            </div>
-                                            <h5>{{ $v.Header }}</h5>
-                                            <div class="checkboxes btn-group-vertical">
-                                        {{ end }}
+                                {{ range $i, $v := (index $.Feedback $name) }} {{ if $v.Header }}
+                            </div>
+                            <h5>{{ $v.Header }}</h5>
+                            <div class="checkboxes btn-group-vertical">
+                                {{ end }}
                                 <label class="btn btn-secondary text-left" style="white-space:normal;" alt="{{ $v.Desc }}">
                                     <input type="checkbox" name="{{ $v.ID }}">
                                     {{ $v.Name }}
                                     <span style="float:right;">({{ $v.Penalty }})</span>
-                                </label>
-                                {{ end }}
+                                </label> {{ end }}
                             </div>
                         </div>
                     </div>
-                {{ end }}
-            </div>
-            <div class="row">
-                {{ range $index, $name := .Order }}
+                    {{ end }}
+                </div>
+                <div class="row">
+                    {{ range $index, $name := .Order }}
                     <div class="columns col-md-3">
                         Extra:
-                        <textarea class="form-control" placeholder="Extra comments" rows="3" name="extra-comments-{{ $name }}"></textarea>
-                        Penalty:
+                        <textarea class="form-control" placeholder="Extra comments" rows="3" name="extra-comments-{{ $name }}"></textarea>                        Penalty:
                         <input class="form-control" type="number" value="0" name="extra-penalty-{{ $name }}" step="0.25" max="0.0" min="-2.0">
                     </div>
-                {{ end }}
-            </div>
-        </form>
-        <footer class="row">
-            <div class="col-md-12 text-center">
-                </br></br>
-                By <a href="https://github.com/Jacobious52">Jacob Gonzalez</a>
-                </br>
-                with <a href="https://github.com/Samuel-Lewis">Sam Lewis</a> and <a href="https://github.com/JakeLane">Jake Lane</a>
-            </div>
-        </footer>
+                    {{ end }}
+                </div>
+            </form>
+            <footer class="row">
+                <div class="col-md-12 text-center">
+                    </br>
+                    </br>
+                    By <a href="https://github.com/Jacobious52">Jacob Gonzalez</a>
+                    </br>
+                    with <a href="https://github.com/Samuel-Lewis">Sam Lewis</a> and <a href="https://github.com/JakeLane">Jake Lane</a>
+                </div>
+            </footer>
     </div>
 </body>
+
 </html>
