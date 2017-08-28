@@ -13,6 +13,14 @@ body {
 	background-color: #c3e5ff !important;
 }
 
+.navbar {
+	background-color: #205081 !important;
+}
+
+.navbar-brand {
+	color: white !important;
+}
+
 .btn-secondary {
 	background-color: #205081 !important;
 	border-color: #205081 !important;
@@ -31,11 +39,12 @@ body {
 	background-color: #4a6785 !important;
 }
 
-.form-control {
-	background-color: #c3e5ff !important;
-}
 
 h1 {
+	color: #205081 !important;
+}
+
+h2 {
 	color: #205081 !important;
 }
 
