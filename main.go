@@ -38,6 +38,7 @@ func main() {
 	rand.Seed(time.Now().Unix())
 
 	models.LoadDatabase("db/feedback.json")
+	models.LoadStats("db/stats.json")
 
 	// routes
 	fs := http.FileServer(http.Dir("static"))
