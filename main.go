@@ -49,6 +49,7 @@ func main() {
 
 	http.HandleFunc("/", BasicAuth(controllers.Build, "addsmarker", "c++11", "addsmarkersite"))
 	http.HandleFunc("/feedback", BasicAuth(controllers.Feedback, "addsmarker", "c++11", "addsmarkersite"))
+	http.HandleFunc("/stats", BasicAuth(controllers.Statistics, "addsmarker", "c++11", "addsmarkersite"))
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

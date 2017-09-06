@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#db5945">
+    <meta lang="en">
+    <title>ADDS Feedback Helper</title>
+    <script src="/static/pace/pace.min.js"></script>
+    <link href="/static/pace/themes/blue/pace-theme-minimal.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/stylesheets/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-light">
+        <h1 class="navbar-brand mb-0">ADDS Feedback Marker</h1>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/db">View Database Files</a>
+            </li>
+        </ul>
+    </nav>
+    <p>
+        <div class="container">
+            <p>
+                <a class="btn btn-lg btn-danger" href="/">Back</a>
+                <div class="row">
+                    <div class="columns col-md-12">
+                        {{ range $week, $freq := .Data }}
+                        <div class="rounded">
+                            <h3>Week: {{ $week }}</h3>
+                            {{ range $name, $count := $freq.Freq}}
+                            <h5>{{ $name }}</h5>
+                            <div class="progress">
+                                <div class="progress-bar {{ call $freq.Color $freq $count }}" role="progressbar" style="width: {{ call $freq.Percentage $freq $count }}%; height: 20px;"
+                                    aria-valuenow="{{ $count }}" aria-valuemin="0" aria-valuemax="{{ $freq.Max }}">{{ $count }} Instances</div>
+                            </div>
+                            <br> {{ end }} {{ end }}
+                        </div>
+                    </div>
+                </div>
+</body>
+
+</html>

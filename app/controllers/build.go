@@ -19,7 +19,8 @@ func Build(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("app/views/build.html")
 	if err != nil {
-		log.Fatal(err.Error())
+		http.Error(w, "Something bad happened. Sorry :(", 500)
+		log.Println(err.Error())
 		return
 	}
 
@@ -27,7 +28,8 @@ func Build(w http.ResponseWriter, r *http.Request) {
 
 	err = tmpl.Execute(w, pack)
 	if err != nil {
-		log.Fatal(err.Error())
+		http.Error(w, "Something bad happened. Sorry :(", 500)
+		log.Println(err.Error())
 		return
 	}
 }
