@@ -1,12 +1,13 @@
 package models
 
 import (
+	"context"
 	"encoding/json"
-	"io/ioutil"
 	"log"
-	"os"
 	"sync"
 	"time"
+
+	"github.com/google/go-github/github"
 )
 
 // Stat contains all the statisics for every week
@@ -54,19 +55,10 @@ func (s *Stat) Add(result Result) {
 	}
 
 	Stats.Lock.Unlock()
-
-	SaveStats("db/stats.json")
 }
 
 // SaveStats Save the stats to disk
-func SaveStats(filename string) {
-	file, err := os.Create(filename)
-	if err != nil {
-		log.Println(err.Error())
-		return
-	}
-	defer file.Close()
-
+func SaveStats(ctx context.Context, client *github.Client, gist *github.Gist) {
 	Stats.Lock.RLock()
 	data, err := json.MarshalIndent(&Stats, "", "    ")
 	Stats.Lock.RUnlock()
@@ -75,8 +67,13 @@ func SaveStats(filename string) {
 		log.Println(err.Error())
 		return
 	}
+	filename := github.GistFilename("stats.json")
+	file := gist.Files[filename]
+	str := string(data)
+	file.Content = &str
+	gist.Files[filename] = file
 
-	_, err = file.Write(data)
+	_, _, err = client.Gists.Edit(ctx, "2b896ec6e671a2b8b16c0e05198dcc83", gist)
 	if err != nil {
 		log.Println(err.Error())
 		return
@@ -86,24 +83,21 @@ func SaveStats(filename string) {
 }
 
 // LoadStats loads the stats from disk
-func LoadStats(filename string) {
-	file, err := os.Open(filename)
+func LoadStats(ctx context.Context, client *github.Client) *github.Gist {
+	gist, _, err := client.Gists.Get(ctx, "2b896ec6e671a2b8b16c0e05198dcc83")
 	if err != nil {
 		log.Println(err.Error())
-		return
-	}
-	defer file.Close()
-
-	data, err := ioutil.ReadAll(file)
-	if err != nil {
-		log.Println(err.Error())
-		return
+		return nil
 	}
 
-	err = json.Unmarshal(data, &Stats)
+	file := gist.Files[github.GistFilename("stats.json")]
+	data := file.GetContent()
+
+	err = json.Unmarshal([]byte(data), &Stats)
 	if err != nil {
 		log.Println(err.Error())
-		return
+		return nil
 	}
 	log.Println("Loaded Stats")
+	return gist
 }
