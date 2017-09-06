@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io"
 	"log"
 	"math"
 	"math/rand"
@@ -23,7 +22,7 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 	log.Println("/feedback", r.Method)
 
 	if r.Method != "POST" {
-		io.WriteString(w, "only accepts POST request. got "+r.Method)
+		http.Error(w, "only accepts POST request. got ", http.StatusBadGateway)
 		return
 	}
 
@@ -31,9 +30,12 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("app/views/feedback.html")
 	if err != nil {
-		log.Fatal(err.Error())
+		http.Error(w, "Failed to create feedback :/", 500)
+		log.Println(err.Error())
 		return
 	}
+
+	result := models.NewResult()
 
 	designMarks := 2.0
 	styleMarks := 2.0
@@ -49,6 +51,8 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 		feedbackBuff.WriteString(fmt.Sprint("\n# ", name, ":\n"))
 		for _, v := range section {
 			if r.Form.Get(v.ID()) == "on" {
+
+				result = result.RecordResult(v.Name)
 
 				v.Penalty = -math.Abs(v.Penalty)
 
@@ -84,6 +88,9 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 				log.Println("Bad extra penalty", err.Error())
 				penalty = 0
 			}
+
+			result = result.RecordResult(extraText)
+
 			penalty = -math.Abs(penalty)
 
 			feedbackBuff.WriteString(extraText)
@@ -158,7 +165,10 @@ func Feedback(w http.ResponseWriter, r *http.Request) {
 
 	err = tmpl.Execute(w, results)
 	if err != nil {
-		log.Fatal(err.Error())
+		http.Error(w, "Failed to create feedback :/", 500)
+		log.Println(err.Error())
 		return
 	}
+
+	result.SaveResult()
 }
