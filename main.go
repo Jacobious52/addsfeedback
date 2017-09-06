@@ -45,6 +45,16 @@ func main() {
 		log.Fatalln("No Gist Token specified. Add env var $TOKEN")
 	}
 
+	user := os.Getenv("USER")
+	if user == "" {
+		log.Fatalln("No Username specified. Add env var $USER")
+	}
+
+	pass := os.Getenv("PASS")
+	if pass == "" {
+		log.Fatalln("No password specified. Add env var $PASS")
+	}
+
 	rand.Seed(time.Now().Unix())
 
 	// setup gist api
@@ -77,9 +87,9 @@ func main() {
 	dbfs := http.FileServer(http.Dir("db"))
 	http.Handle("/db/", http.StripPrefix("/db/", dbfs))
 
-	http.HandleFunc("/", BasicAuth(controllers.Build, "addsmarker", "c++11", "addsmarkersite"))
-	http.HandleFunc("/feedback", BasicAuth(controllers.Feedback, "addsmarker", "c++11", "addsmarkersite"))
-	http.HandleFunc("/stats", BasicAuth(controllers.Statistics, "addsmarker", "c++11", "addsmarkersite"))
+	http.HandleFunc("/", BasicAuth(controllers.Build, user, pass, "addsmarkersite"))
+	http.HandleFunc("/feedback", BasicAuth(controllers.Feedback, user, pass, "addsmarkersite"))
+	http.HandleFunc("/stats", BasicAuth(controllers.Statistics, user, pass, "addsmarkersite"))
 
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
