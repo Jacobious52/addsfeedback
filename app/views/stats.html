@@ -29,10 +29,10 @@
                 <a class="btn btn-lg btn-danger" href="/">Back</a>
                 <div class="row">
                     <div class="columns col-md-12">
-                        {{ range $index, $week := .Order}} {{ $freq := (index $.Data $week) }}
+                        {{ range $i, $week := .Order}} {{ $freq := (index $.Data $week) }}
                         <div class="rounded">
                             <h3>Week: {{ $week }}</h3>
-                            {{ range $name, $count := $freq.Freq }}
+                            {{ range $j, $name := $freq.Order }} {{ $count := (index $freq.Freq $name) }}
                             <h5>{{ $name }}</h5>
                             <div class="progress">
                                 <div class="progress-bar {{ call $freq.Color $freq $count }}" role="progressbar" style="width: {{ call $freq.Percentage $freq $count }}%; height: 20px;"

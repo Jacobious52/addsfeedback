@@ -16,9 +16,32 @@ type statPack struct {
 
 type week struct {
 	Freq       models.Freq
+	Order      []string
 	Max        int
 	Percentage func(w week, amount int) int
 	Color      func(w week, amount int) string
+}
+
+func freqOrder(w week) []string {
+	type pair struct {
+		Key   string
+		Value int
+	}
+
+	var order []pair
+	for k, v := range w.Freq {
+		order = append(order, pair{k, v})
+	}
+
+	sort.Slice(order, func(i, j int) bool {
+		return order[i].Value > order[j].Value
+	})
+
+	var keys []string
+	for _, k := range order {
+		keys = append(keys, k.Key)
+	}
+	return keys
 }
 
 func weekOrder(s statPack) []int {
@@ -67,7 +90,9 @@ func Statistics(w http.ResponseWriter, r *http.Request) {
 				max = i
 			}
 		}
-		wk := week{f, max, percentageFunc, colorFunc}
+		var fOrder []string
+		wk := week{f, fOrder, max, percentageFunc, colorFunc}
+		wk.Order = freqOrder(wk)
 		pack.Data[w] = wk
 	}
 	pack.Order = weekOrder(pack)
