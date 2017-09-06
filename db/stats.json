@@ -1,3 +1,23 @@
 {
-    "Data": {}
+    "Data": {
+        "80": {
+            "Bad UML Style": 5,
+            "Code before Design": 3,
+            "Code in design": 1,
+            "No UML": 1
+        },
+        "36": {
+            "Bad UML Style": 1,
+            "Code before Design": 3,
+            "Code in design": 1,
+            "No UML": 1
+        },
+        "37": {
+            "Bad UML Style": 1,
+            "Code before Design": 3,
+            "Code in design": 4,
+            "No UML": 5
+        }
+    },
+    "Lock": {}
 }

@@ -4,12 +4,14 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"sort"
 
 	"github.com/Jacobious52/addsfeedback/app/models"
 )
 
 type statPack struct {
-	Data map[int]week
+	Data  map[int]week
+	Order []int
 }
 
 type week struct {
@@ -17,6 +19,15 @@ type week struct {
 	Max        int
 	Percentage func(w week, amount int) int
 	Color      func(w week, amount int) string
+}
+
+func weekOrder(s statPack) []int {
+	var keys []int
+	for k := range s.Data {
+		keys = append(keys, k)
+	}
+	sort.Sort(sort.Reverse(sort.IntSlice(keys)))
+	return keys
 }
 
 func percentageFunc(w week, amount int) int {
@@ -46,7 +57,8 @@ func Statistics(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pack := statPack{make(map[int]week)}
+	var order []int
+	pack := statPack{make(map[int]week), order}
 	models.Stats.Lock.RLock()
 	for w, f := range models.Stats.Data {
 		max := 0
@@ -58,6 +70,7 @@ func Statistics(w http.ResponseWriter, r *http.Request) {
 		wk := week{f, max, percentageFunc, colorFunc}
 		pack.Data[w] = wk
 	}
+	pack.Order = weekOrder(pack)
 	models.Stats.Lock.RUnlock()
 
 	err = tmpl.Execute(w, pack)
