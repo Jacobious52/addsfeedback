@@ -47,6 +47,7 @@ func Statistics(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pack := statPack{make(map[int]week)}
+	models.Stats.Lock.RLock()
 	for w, f := range models.Stats.Data {
 		max := 0
 		for _, i := range f {
@@ -57,6 +58,7 @@ func Statistics(w http.ResponseWriter, r *http.Request) {
 		wk := week{f, max, percentageFunc, colorFunc}
 		pack.Data[w] = wk
 	}
+	models.Stats.Lock.RUnlock()
 
 	err = tmpl.Execute(w, pack)
 	if err != nil {

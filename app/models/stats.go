@@ -12,7 +12,7 @@ import (
 // Stat contains all the statisics for every week
 type Stat struct {
 	Data map[int]Freq
-	lock sync.RWMutex
+	Lock sync.RWMutex
 }
 
 // Freq is the frequency a name of a penatly occurs
@@ -43,7 +43,7 @@ var Stats *Stat
 func (s *Stat) Add(result Result) {
 	_, w := time.Now().ISOWeek()
 
-	Stats.lock.Lock()
+	Stats.Lock.Lock()
 
 	if _, ok := Stats.Data[w]; !ok {
 		Stats.Data[w] = make(Freq)
@@ -53,7 +53,7 @@ func (s *Stat) Add(result Result) {
 		Stats.Data[w][r]++
 	}
 
-	Stats.lock.Unlock()
+	Stats.Lock.Unlock()
 
 	SaveStats("db/stats.json")
 }
@@ -67,9 +67,9 @@ func SaveStats(filename string) {
 	}
 	defer file.Close()
 
-	Stats.lock.RLock()
+	Stats.Lock.RLock()
 	data, err := json.Marshal(&Stats)
-	Stats.lock.RUnlock()
+	Stats.Lock.RUnlock()
 
 	if err != nil {
 		log.Println(err.Error())
