@@ -5,11 +5,15 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sync"
 	"time"
 )
 
 // Stat contains all the statisics for every week
-type Stat map[int]Freq
+type Stat struct {
+	Data map[int]Freq
+	lock sync.RWMutex
+}
 
 // Freq is the frequency a name of a penatly occurs
 type Freq map[string]int
@@ -33,19 +37,23 @@ func (r Result) SaveResult() {
 }
 
 // Stats is the global stats database object
-var Stats Stat
+var Stats *Stat
 
 // Add a result to the feedback
-func (s Stat) Add(result Result) {
+func (s *Stat) Add(result Result) {
 	_, w := time.Now().ISOWeek()
 
-	if _, ok := Stats[w]; !ok {
-		Stats[w] = make(Freq)
+	Stats.lock.Lock()
+
+	if _, ok := Stats.Data[w]; !ok {
+		Stats.Data[w] = make(Freq)
 	}
 
 	for _, r := range result {
-		Stats[w][r]++
+		Stats.Data[w][r]++
 	}
+
+	Stats.lock.Unlock()
 
 	SaveStats("db/stats.json")
 }
@@ -54,20 +62,23 @@ func (s Stat) Add(result Result) {
 func SaveStats(filename string) {
 	file, err := os.Create(filename)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 	defer file.Close()
 
+	Stats.lock.RLock()
 	data, err := json.Marshal(&Stats)
+	Stats.lock.RUnlock()
+
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 
 	_, err = file.Write(data)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 
@@ -78,20 +89,20 @@ func SaveStats(filename string) {
 func LoadStats(filename string) {
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 	defer file.Close()
 
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 
 	err = json.Unmarshal(data, &Stats)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Println(err.Error())
 		return
 	}
 	log.Println("Loaded Stats")
