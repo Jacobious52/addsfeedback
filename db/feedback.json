@@ -28,6 +28,11 @@
             "Penalty": -0.5
         },
         {
+            "Name": "Bad descriptions",
+            "Desc": "Descriptions of core functions should explain WHAt and HOW you are going to do your implementations",
+            "Penalty": -0.5
+        },
+        {
             "Name": "Dot point format",
             "Desc": "When writing your descriptions, use dot point format to help structure and readability",
             "Penalty": 0
@@ -53,6 +58,11 @@
         {
             "Name": "`using namespace std`",
             "Desc": "Do not include `using namespace std;` in your header files, as it pollutes the namespace and encourages bad design",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "Bad file structure",
+            "Desc": "Each class should have its own header file and implementation file",
             "Penalty": -0.5
         },
         {
@@ -90,6 +100,11 @@
         {
             "Name": "Dead code",
             "Desc": "Avoid including commented out code in your final submission",
+            "Penalty": -0.5
+        },
+        {
+            "Name": "main() too big",
+            "Desc": "Too much functionality in your main function. Try to abstrasct your code into other functions",
             "Penalty": -0.5
         }
     ],
