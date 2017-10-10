@@ -140,6 +140,12 @@
             "Name": "Fail some tests",
             "Desc": "Failing some test cases. Make sure you are testing thoroughly before submitting",
             "Penalty": -1
+        },
+        {
+            "Header": "Prac Specific",
+            "Name": "Wrong pivot",
+            "Desc": "Assignment spec required use of 2nd element as the pivot",
+            "Penalty": -0.5
         }
     ],
     "Other": [
