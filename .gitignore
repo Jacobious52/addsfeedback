@@ -1,3 +1,6 @@
 vendor/*/
 .env
 Procfile
+
+bust.yaml
+deployment.yaml

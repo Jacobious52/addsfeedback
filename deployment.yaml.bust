@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: adds-marker
+  labels:
+    app: adds
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adds
+  template:
+    metadata:
+      labels:
+        app: adds
+    spec:
+      containers:
+      - name: adds
+        image: jacobious/deployments:adds
+        env:
+          - name: TOKEN
+            value: "{{.secrets.token}}"
+          - name: PORT
+            value: {{.port}}
+          - name: USER
+            value: "{{.secrets.user}}"
+          - name: PASS
+            value: "{{.secrets.pass}}"
+        ports:
+        - containerPort: {{.port}}
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: adds-marker
+spec:
+  selector:
+    app: adds
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: {{.port}}
+  type: LoadBalancer
